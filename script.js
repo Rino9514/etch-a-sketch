@@ -1,4 +1,6 @@
-const container = document.querySelector(".main-container");
+const container = document.querySelector(".grid-container");
+const btn   = document.querySelector("button");
+const input = document.querySelector("input");
 let height_width = parseFloat(getComputedStyle(container).height); 
 // console.log()
 
@@ -21,5 +23,27 @@ function createGrid(square_length){
 function changeColor(event,multiple_square){
     multiple_square.style.backgroundColor="rgb(" + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + ")";
 }
+
+function resetGrid(event,length_new_grid){
+    while(container.firstChild){
+        container.removeChild(container.firstChild);
+    };
+    if(!Number.isNaN(Number(length_new_grid))){
+        if (length_new_grid>=1 && length_new_grid <=100){
+            createGrid(length_new_grid);
+        } else {
+            createGrid(16);
+        }
+    } else{
+        createGrid(16);
+    }
+    console.log(!Number.isNaN(length_new_grid))
+}
+
+btn.addEventListener("click", (event) => {
+    resetGrid(event,input.value);
+})
+
+
 
 createGrid(16);
